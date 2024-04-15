@@ -3,3 +3,43 @@
 # Big Ideas:
 #   - Classes allow us to couple data and functions together
 #   - Objects are the ACTUAL representation of the classes
+
+
+# Create a Pokemon class; this represents a Pokemon
+class Pokemon:  # use a capital letter for class name
+    def __init__(self):
+        """A special method (function) called the
+        Constructor. Contains all the properties/variables
+        that describe a Pokemon."""
+        self.name = ""
+        self.id = 0
+        self.weight = 0
+        self.height = 0
+        self.type = "normal"
+
+        print("A new Pokémon is born!")
+
+
+# Create two Pokemon using our class
+# Make one Pokemon that is Pikachu
+pokemon_one = Pokemon()
+
+# Change some properties in pokemon_one
+#   Change its name
+print(pokemon_one.name)  # ""
+pokemon_one.name = "Pikachu"
+print(pokemon_one.name)  # "Pikachu"
+
+pokemon_one.id = 25
+pokemon_one.type = "Electric"
+
+print(pokemon_one.id)
+print(pokemon_one.type)
+
+
+# Make one Pokemon of your choice
+# Store it in a variable called
+#    pokemon_two
+#    - you can make Squirtle
+#       - id -> 4
+#       - type -> "Water"
