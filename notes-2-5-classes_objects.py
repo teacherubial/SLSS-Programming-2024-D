@@ -43,3 +43,12 @@ print(pokemon_one.type)
 #    - you can make Squirtle
 #       - id -> 4
 #       - type -> "Water"
+pokemon_two = Pokemon()
+
+pokemon_two.name = "Squirtle"
+pokemon_two.id = 4
+pokemon_two.type = "water"
+
+print(pokemon_two.name)
+print(pokemon_two.id)
+print(pokemon_two.type)
