@@ -73,6 +73,24 @@ class Pikachu(Pokemon):
         return response
 
 
+# Create a new child-class of pokemon for the type of your choice
+# If you don't know any pokemon, use this: https://pokemondb.net/pokedex/national
+#   - create a new child class
+#   - create a constructor and set the default values for its properties
+#       - i.e. its name, id, type, etc.
+#   - create a new method for its attack
+
+
+class Kecleon(Pokemon):
+    def __init__(self):
+        super().__init__()
+
+        pass
+
+    def sucker_punch(defender: Pokemon) -> str:
+        pass
+
+
 # Create two Pokemon using our class
 # Make one Pokemon that is Pikachu
 pokemon_one = Pokemon()
