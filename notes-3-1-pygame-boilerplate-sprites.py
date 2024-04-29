@@ -92,6 +92,9 @@ def start():
             if event.type == pygame.KEYDOWN:
                 if pygame.key.get_pressed()[pygame.K_SPACE]:
                     all_sprites.add(Dvdlogo())
+                if pygame.key.get_pressed()[pygame.K_BACKSPACE]:
+                    if len(all_sprites) > 0:
+                        all_sprites.spritedict.popitem()
 
         # --- Update the world state
         # Update the location of EVERY SPRITE
