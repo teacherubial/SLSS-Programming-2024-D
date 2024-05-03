@@ -20,6 +20,8 @@ SCREEN_SIZE = (WIDTH, HEIGHT)
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
+        super().__init__()
+
         self.image = pg.image.load("./Images/mario.webp")
 
         self.rect = self.image.get_rect()
@@ -43,7 +45,12 @@ def start():
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
 
-    pg.display.set_caption("<WINDOW TITLE HERE>")
+    # Create a player and store it in a variable
+    player = Player()
+
+    all_sprites.add(player)
+
+    pg.display.set_caption("Jewel Thief Clone (Don't sue us Nintendo)")
 
     # --Main Loop--
     while not done:
@@ -53,9 +60,12 @@ def start():
                 done = True
 
         # --- Update the world state
+        all_sprites.update()
 
         # --- Draw items
         screen.fill(BLACK)
+
+        all_sprites.draw(screen)
 
         # Update the screen with anything new
         pg.display.flip()
