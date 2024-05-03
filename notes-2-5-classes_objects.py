@@ -82,13 +82,24 @@ class Pikachu(Pokemon):
 
 
 class Kecleon(Pokemon):
-    def __init__(self):
+    def __init__(self, name="Kecleon"):
         super().__init__()
 
-        pass
+        # Assign the default values to properties
+        self.name = name
+        self.id = 25
+        self.actual_cry = "Blarrgeeeblargblarg"
 
-    def sucker_punch(defender: Pokemon) -> str:
-        pass
+    def sucker_punch(self, defender: Pokemon) -> str:
+        """Dark type attack"""
+        response = f"{self.name} used sucker punch on {defender.name}."
+
+        if defender.type.lower() in ["psychic", "ghost"]:
+            response = response + " It was super effective!"
+        elif defender.type.lower() in ["fighting", "dark", "fairy"]:
+            response = response + " It was not very effective."
+
+        return response
 
 
 # Create two Pokemon using our class
@@ -108,7 +119,6 @@ print(pokemon_one.id)
 print(pokemon_one.type)
 
 
-# Make one Pokemon of your choice
 # Store it in a variable called
 #    pokemon_two
 #    - you can make Squirtle
@@ -129,6 +139,7 @@ pokemon_two.actual_cry = "GRRraaggrrggg"
 
 print(pokemon_one.cry())
 print(pokemon_two.cry())
+# Make one Pokemon of your choice
 
 # Test the eat method
 print(pokemon_one.eat("berry"))
@@ -148,3 +159,6 @@ print(pikachu_two.eat("potion"))
 
 print(pikachu_one.thundershock(pokemon_one))
 print(pikachu_two.thundershock(pokemon_two))
+
+kecleon_one = Kecleon()
+print(kecleon_one.sucker_punch(pikachu_one))
