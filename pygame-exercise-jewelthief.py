@@ -1,6 +1,7 @@
 # pygame-exercise-jewelthief.py
 # Clone of Jewel Thief Game
 
+import random
 import pygame as pg
 
 # --CONSTANTS--
@@ -17,8 +18,11 @@ WIDTH = 1280  # Pixels
 HEIGHT = 720
 SCREEN_SIZE = (WIDTH, HEIGHT)
 
+NUM_COINS = 10
+
 
 class Player(pg.sprite.Sprite):
+    # TODO: Change Mario image depending on facing direction
     def __init__(self):
         super().__init__()
 
@@ -32,10 +36,24 @@ class Player(pg.sprite.Sprite):
         self.rect.centery = pg.mouse.get_pos()[1]
 
 
+class Coin(pg.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        self.image = pg.image.load("./Images/coin.png")
+
+        self.rect = self.image.get_rect()
+
+        # Randomize initial location
+        self.rect.x = random.randrange(0, WIDTH - self.rect.width)
+        self.rect.y = random.randrange(0, HEIGHT - self.rect.height)
+
+
 def start():
     """Environment Setup and Game Loop"""
 
     pg.init()
+    pg.mouse.set_visible(False)
 
     # --Game State Variables--
     screen = pg.display.set_mode(SCREEN_SIZE)
@@ -44,6 +62,15 @@ def start():
 
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
+
+    # Coin sprites
+    coin_sprites = pg.sprite.Group()
+
+    for _ in range(NUM_COINS):
+        coin = Coin()
+
+        all_sprites.add(coin)
+        coin_sprites.add(coin)
 
     # Create a player and store it in a variable
     player = Player()
@@ -62,8 +89,17 @@ def start():
         # --- Update the world state
         all_sprites.update()
 
+        # Collision between player and coin_sprites
+        # Get a list of ALL coin_sprites that collide
+        #     with the player
+        # For every coin that collides, print "COLLISION!"
+        coins_collided = pg.sprite.spritecollide(player, coin_sprites, False)
+
+        for coin in coins_collided:
+            print(f"COLLISION at {coin.rect.x}, {coin.rect.y}")
+
         # --- Draw items
-        screen.fill(BLACK)
+        screen.fill(WHITE)
 
         all_sprites.draw(screen)
 
