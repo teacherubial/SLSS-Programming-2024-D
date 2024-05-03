@@ -18,6 +18,18 @@ HEIGHT = 720
 SCREEN_SIZE = (WIDTH, HEIGHT)
 
 
+class Player(pg.sprite.Sprite):
+    def __init__(self):
+        self.image = pg.image.load("./Images/mario.webp")
+
+        self.rect = self.image.get_rect()
+
+    def update(self):
+        """Updates the location of sprite to the mouse cursor"""
+        self.rect.centerx = pg.mouse.get_pos()[0]
+        self.rect.centery = pg.mouse.get_pos()[1]
+
+
 def start():
     """Environment Setup and Game Loop"""
 
