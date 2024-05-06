@@ -18,7 +18,7 @@ WIDTH = 1280  # Pixels
 HEIGHT = 720
 SCREEN_SIZE = (WIDTH, HEIGHT)
 
-NUM_COINS = 10
+NUM_COINS = 100
 
 
 class Player(pg.sprite.Sprite):
@@ -60,6 +60,8 @@ def start():
     done = False
     clock = pg.time.Clock()
 
+    score = 0
+
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
 
@@ -93,10 +95,13 @@ def start():
         # Get a list of ALL coin_sprites that collide
         #     with the player
         # For every coin that collides, print "COLLISION!"
-        coins_collided = pg.sprite.spritecollide(player, coin_sprites, False)
+        coins_collided = pg.sprite.spritecollide(player, coin_sprites, True)
 
         for coin in coins_collided:
-            print(f"COLLISION at {coin.rect.x}, {coin.rect.y}")
+            # increase the score by 1
+            score += 1
+
+            print(score)
 
         # --- Draw items
         screen.fill(WHITE)
