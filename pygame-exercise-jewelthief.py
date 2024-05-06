@@ -92,9 +92,6 @@ def start():
         all_sprites.update()
 
         # Collision between player and coin_sprites
-        # Get a list of ALL coin_sprites that collide
-        #     with the player
-        # For every coin that collides, print "COLLISION!"
         coins_collided = pg.sprite.spritecollide(player, coin_sprites, True)
 
         for coin in coins_collided:
@@ -102,6 +99,14 @@ def start():
             score += 1
 
             print(score)
+
+        # if the coin_sprites group is empty
+        # respawn all the coins
+        if len(coin_sprites) <= 0:
+            for _ in range(NUM_COINS):
+                coin = Coin()
+                all_sprites.add(coin)
+                coin_sprites.add(coin)
 
         # --- Draw items
         screen.fill(WHITE)
