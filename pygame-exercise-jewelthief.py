@@ -173,6 +173,13 @@ def start():
                 all_sprites.add(coin)
                 coin_sprites.add(coin)
 
+        # Detect collision with enemies
+        enemies_collided = pg.sprite.spritecollide(player, enemy_sprites, False)
+
+        # Iterate through enemies collided to notify in console
+        for enemy in enemies_collided:
+            print("COLLIDED!")
+
         # --- Draw items
         screen.fill(WHITE)
 
