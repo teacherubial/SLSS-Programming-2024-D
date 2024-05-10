@@ -115,13 +115,14 @@ def start():
     pg.init()
     pg.mouse.set_visible(False)
 
-    # --Game St
-    # ate Variables--
+    # --Game State Variables--
     screen = pg.display.set_mode(SCREEN_SIZE)
     done = False
     clock = pg.time.Clock()
 
     score = 0
+
+    font = pg.font.SysFont("Futura", 24)
 
     # -- Sprite Groups
     # All sprites go in this sprite Group
@@ -190,6 +191,16 @@ def start():
         screen.fill(WHITE)
 
         all_sprites.draw(screen)
+
+        # Create score and lives
+        score_image = font.render(f"Score: {score}", True, GREEN)
+        lives_image = font.render(
+            f"Lives Remaining: {int(player.lives_remaining)}", True, GREEN
+        )
+
+        # Draw/blit the image on the screen
+        screen.blit(score_image, (5, 5))
+        screen.blit(lives_image, (5, 35))
 
         # Update the screen with anything new
         pg.display.flip()
