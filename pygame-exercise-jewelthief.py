@@ -43,6 +43,8 @@ class Player(pg.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
+        self.lives_remaining = 9
+
         self.facing = 0  # 0 is right, 1 is left
 
     def update(self):
@@ -178,7 +180,11 @@ def start():
 
         # Iterate through enemies collided to notify in console
         for enemy in enemies_collided:
-            print("COLLIDED!")
+            # Decrease player's life by one life per second
+            player.lives_remaining -= 1 / 60
+
+            # Print player's current lives remaining
+            print(f"Lives: {int(player.lives_remaining)}")
 
         # --- Draw items
         screen.fill(WHITE)
