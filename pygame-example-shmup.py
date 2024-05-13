@@ -18,6 +18,31 @@ HEIGHT = 1000
 SCREEN_SIZE = (WIDTH, HEIGHT)
 
 
+# TODO: Player class
+#      - Mouse movement
+#      - Limit player position to the bottom
+class Player(pg.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        self.image = pg.image.load("./Images/galaga_ship.png")
+
+        self.rect = self.image.get_rect()
+
+    def update(self):
+        """Follow the mouse"""
+        self.rect.center = pg.mouse.get_pos()
+
+
+# TODO: Bullets/lasers
+#      - Image - picture or pygame surface?
+#      - Spawn at the Player
+#      - Vertical velocity
+
+# TODO: Enemies
+#      - Move left to right to left
+
+
 def start():
     """Environment Setup and Game Loop"""
 
@@ -31,6 +56,11 @@ def start():
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
 
+    # Create the Player sprite object
+    player = Player()
+
+    all_sprites.add(player)
+
     pg.display.set_caption("Shoot 'Em Up")
 
     # --Main Loop--
@@ -41,9 +71,12 @@ def start():
                 done = True
 
         # --- Update the world state
+        all_sprites.update()
 
         # --- Draw items
         screen.fill(BLACK)
+
+        all_sprites.draw(screen)
 
         # Update the screen with anything new
         pg.display.flip()
