@@ -19,7 +19,6 @@ SCREEN_SIZE = (WIDTH, HEIGHT)
 
 
 # TODO: Player class
-#      - Mouse movement
 #      - Limit player position to the bottom
 class Player(pg.sprite.Sprite):
     def __init__(self):
@@ -32,6 +31,10 @@ class Player(pg.sprite.Sprite):
     def update(self):
         """Follow the mouse"""
         self.rect.center = pg.mouse.get_pos()
+
+        # Keep it at the bottom of the screen
+        if self.rect.top < HEIGHT - 200:
+            self.rect.top = HEIGHT - 200
 
 
 # TODO: Bullets/lasers
