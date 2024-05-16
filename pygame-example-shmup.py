@@ -23,6 +23,9 @@ class Player(pg.sprite.Sprite):
         super().__init__()
 
         self.image = pg.image.load("./Images/galaga_ship.png")
+        self.image = pg.transform.scale(
+            self.image, (self.image.get_width() // 2, self.image.get_height() // 2)
+        )
 
         self.rect = self.image.get_rect()
 
@@ -89,7 +92,8 @@ def start():
             if event.type == pg.QUIT:
                 done = True
             if event.type == pg.MOUSEBUTTONDOWN:
-                all_sprites.add(Bullet((player.rect.centerx, player.rect.top)))
+                bullet = Bullet((player.rect.centerx, player.rect.top))
+                all_sprites.add(bullet)
 
         # --- Update the world state
         all_sprites.update()
@@ -104,6 +108,8 @@ def start():
 
         # --- Tick the Clock
         clock.tick(60)  # 60 fps
+
+    pg.quit()
 
 
 def main():
