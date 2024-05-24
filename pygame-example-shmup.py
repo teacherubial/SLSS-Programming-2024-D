@@ -1,6 +1,7 @@
 # pygame-example-shmup.py
 # Shoot 'em up
 
+import random
 import pygame as pg
 
 # --CONSTANTS--
@@ -16,6 +17,8 @@ GRAY = (128, 128, 128)
 WIDTH = 720
 HEIGHT = 1000
 SCREEN_SIZE = (WIDTH, HEIGHT)
+
+NUM_ENEMIES = 20
 
 
 class Player(pg.sprite.Sprite):
@@ -73,6 +76,35 @@ class Bullet(pg.sprite.Sprite):
 
 # TODO: Enemies
 #      - Move left to right to left
+class Enemy(pg.sprite.Sprite):
+    def __init__(self, centerx: int, centery: int):
+        """
+        Params:
+            centerx: center x spawn of the enemy
+            centery: center y spawn of the enemy
+        """
+        super().__init__()
+
+        self.image = pg.image.load("./Images/mario.png")
+
+        self.rect = self.image.get_rect()
+        self.rect.centerx, self.rect.centery = centerx, centery
+
+        self.vel_x = 4
+        self.vel_y = 2
+
+    def update(self):
+        # Movement
+        self.rect.x += self.vel_x
+        self.rect.y += self.vel_y
+
+        # Bounce in the x-axis
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+            self.vel_x *= -1
+        if self.rect.left < 0:
+            self.rect.left = 0
+            self.vel_x *= -1
 
 
 def start():
@@ -88,11 +120,20 @@ def start():
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
     bullet_sprites = pg.sprite.Group()
+    enemy_sprites = pg.sprite.Group()
 
     # Create the Player sprite object
     player = Player()
 
     all_sprites.add(player)
+
+    # Create and spawn all enemies randomly in y
+    for _ in range(NUM_ENEMIES):
+        enemy = Enemy(
+            random.randrange(20, WIDTH - 20), random.randrange(20, HEIGHT - 400)
+        )
+        all_sprites.add(enemy)
+        enemy_sprites.add(enemy)
 
     pg.display.set_caption("Shoot 'Em Up")
 
