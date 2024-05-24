@@ -41,10 +41,6 @@ class Player(pg.sprite.Sprite):
             self.rect.top = HEIGHT - 200
 
 
-# TODO: Bullets/lasers
-#      - Image - picture or pygame surface?
-#      - Spawn at the Player
-#      - Vertical velocity
 class Bullet(pg.sprite.Sprite):
     def __init__(self, player_loc: list):
         """
@@ -74,8 +70,6 @@ class Bullet(pg.sprite.Sprite):
             self.kill()
 
 
-# TODO: Enemies
-#      - Move left to right to left
 class Enemy(pg.sprite.Sprite):
     def __init__(self, centerx: int, centery: int):
         """
