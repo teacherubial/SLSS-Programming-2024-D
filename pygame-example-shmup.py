@@ -151,6 +151,14 @@ def start():
         # --- Update the world state
         all_sprites.update()
 
+        # Collision between bullets and enemies
+        for bullet in bullet_sprites:
+            enemies_hit = pg.sprite.spritecollide(bullet, enemy_sprites, False)
+
+            for enemy in enemies_hit:
+                enemy.kill()
+                bullet.kill()
+
         # --- Draw items
         screen.fill(BLACK)
 
