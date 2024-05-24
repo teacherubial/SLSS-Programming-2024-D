@@ -60,6 +60,16 @@ class Bullet(pg.sprite.Sprite):
         self.rect.centerx = player_loc[0]
         self.rect.bottom = player_loc[1]
 
+        self.vel_y = -3  # move up
+
+    def update(self):
+        """Move bullets up"""
+        self.rect.y += self.vel_y
+
+        # Kill the bullet if it leaves the screen
+        if self.rect.bottom < 0:
+            self.kill()
+
 
 # TODO: Enemies
 #      - Move left to right to left
@@ -77,6 +87,7 @@ def start():
 
     # All sprites go in this sprite Group
     all_sprites = pg.sprite.Group()
+    bullet_sprites = pg.sprite.Group()
 
     # Create the Player sprite object
     player = Player()
@@ -94,6 +105,7 @@ def start():
             if event.type == pg.MOUSEBUTTONDOWN:
                 bullet = Bullet((player.rect.centerx, player.rect.top))
                 all_sprites.add(bullet)
+                bullet_sprites.add(bullet)
 
         # --- Update the world state
         all_sprites.update()
